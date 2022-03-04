@@ -4,9 +4,9 @@ plugins {
 	id 'java'
 }
 
-group = 'no.kebabproffen'
+group = 'no.kebabproffen.kebabproffen'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '16'
+sourceCompatibility = '17'
 
 repositories {
 	mavenCentral()

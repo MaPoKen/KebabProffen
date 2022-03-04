@@ -1,12 +1,12 @@
-package no.kebabproffen.kebabproffen;
+package no.kebabproffen.models;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users") 
-class User {
+@Table(name = "users")
+public class User {
 
     @Id
     @GeneratedValue(generator = "UUID")

@@ -1,0 +1,1 @@
+package no.kebabproffen.models;

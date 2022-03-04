@@ -1,4 +1,4 @@
-package no.kebabproffen.kebabproffen;
+package no.kebabproffen.models;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;  

@@ -1,10 +1,10 @@
-package no.kebabproffen.kebabproffen;
+package no.kebabproffen.models;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "location")
-class Location{
+public class Location{
 
 //    @OneToMany
     

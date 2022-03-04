@@ -1,4 +1,4 @@
-package no.kebabproffen.kebabproffen;
+package no.kebabproffen.controllers;
 
 import java.util.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import no.kebabproffen.models.User;
+import no.kebabproffen.repositories.*;
 
 @RestController
 @RequestMapping("/api")

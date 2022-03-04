@@ -1,11 +1,11 @@
-package no.kebabproffen.kebabproffen;
+package no.kebabproffen.models;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
 @Table(name = "review")
-class Review {
+public class Review {
     
     @Id
     @GeneratedValue
