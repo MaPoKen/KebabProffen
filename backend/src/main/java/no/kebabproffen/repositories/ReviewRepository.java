@@ -1,9 +1,11 @@
 package no.kebabproffen.repositories;
 
-import no.kebabproffen.models.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import no.kebabproffen.models.DAO.ReviewDAO;
+
 import java.util.UUID;
 
-public interface ReviewRepository extends JpaRepository<Review, UUID> {
+public interface ReviewRepository extends JpaRepository<ReviewDAO, UUID> {
     
 }

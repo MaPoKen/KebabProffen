@@ -5,15 +5,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.User;
+import no.kebabproffen.models.DAO.UserDAO;
+import no.kebabproffen.models.DTO.UserDTO;
 import no.kebabproffen.repositories.*;
 
 @RestController
@@ -27,20 +24,19 @@ class UserController {
   }
 
   @GetMapping("/")
-  List<User> all() {
-    return repository.findAll();
+  List<UserDTO> all() {
+    return repository.findAll().stream().map(UserDAO::toDTO).toList();
   }
 
 
   @PostMapping("/")
-  User newUser(@RequestBody User newUser) {
-    return repository.save(newUser);
+  UserDTO newUser(@RequestBody UserDTO newUser) {
+    return repository.save(newUser.toDAO()).toDTO();
   }
 
   @GetMapping("/{userId}")
-  User one(@PathVariable("userId") UUID userId) {
-    return repository.findById(userId)
-    .orElseGet(() -> null);
+  UserDTO one(@PathVariable("userId") UUID userId) {
+    return repository.findById(userId).get().toDTO();
   }
 
   @DeleteMapping("/{userId}")

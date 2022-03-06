@@ -3,17 +3,13 @@ package no.kebabproffen.controllers;
 import java.util.*;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.Review;
+import no.kebabproffen.models.DAO.ReviewDAO;
+import no.kebabproffen.models.DTO.ReviewDTO;
 import no.kebabproffen.repositories.ReviewRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,18 +26,18 @@ public class ReviewController {
     }
 
     @GetMapping(value="/")
-    public List<Review> getReviews() {
-        return repository.findAll();
+    public List<ReviewDTO> getReviews() {
+        return repository.findAll().stream().map(ReviewDAO::toDTO).toList();
     }
 
     @PostMapping(value = "/")
-    Review createReview(@RequestBody Review review){
-        return repository.save(review);
+    ReviewDTO createReview(@RequestBody ReviewDTO review){
+        return repository.save(review.toDAO()).toDTO();
     }
     
     @GetMapping(value = "/{reviewId}")
-    Review getReview(@RequestParam UUID reviewId){
-        return repository.getById(reviewId);
+    ReviewDTO getReview(@RequestParam UUID reviewId){
+        return repository.getById(reviewId).toDTO();
     }
 
     @DeleteMapping(value = "/{reviewId}")

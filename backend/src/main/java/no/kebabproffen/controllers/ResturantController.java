@@ -5,16 +5,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.Resturant;
+import no.kebabproffen.models.DAO.ResturantDAO;
+import no.kebabproffen.models.DTO.ResturantDTO;
 import no.kebabproffen.repositories.ResturantRepository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -29,18 +26,18 @@ public class ResturantController {
     }
 
     @GetMapping(value="/")
-    public List<Resturant> getResturants() {
-        return repository.findAll();
+    public List<ResturantDTO> getResturants() {
+        return repository.findAll().stream().map(ResturantDAO::toDTO).toList();
     }
 
     @PostMapping(value = "/")
-    Resturant createResturant(@RequestBody Resturant resturant){
-        return repository.save(resturant);
+    ResturantDTO createResturant(@RequestBody ResturantDTO resturant){
+        return repository.save(resturant.toDAO()).toDTO();
     }
     
     @GetMapping(value = "/{resturantId}")
-    Resturant getResturant(@PathVariable UUID resturantId){
-        return repository.getById(resturantId);
+    ResturantDTO getResturant(@PathVariable UUID resturantId){
+        return repository.getById(resturantId).toDTO();
     }
 
     @DeleteMapping(value = "/{resturantId}")

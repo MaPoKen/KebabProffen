@@ -1,10 +1,14 @@
-package no.kebabproffen.models;
+package no.kebabproffen.models.DAO;
 import javax.persistence.*;
+
+import no.kebabproffen.models.DAOInterface;
+import no.kebabproffen.models.DTO.UserDTO;
+
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserDAO implements DAOInterface<UserDTO>{
 
     @Id
     @GeneratedValue
@@ -19,7 +23,7 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    public User(String username, String hashedPassword, String email){
+    public UserDAO(String username, String hashedPassword, String email){
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.email = email;
@@ -51,6 +55,11 @@ public class User {
 
     public void setEmail(String newEmail){
         email = newEmail;
+    }
+
+    @Override
+    public UserDTO toDTO() {
+        return new UserDTO(username, hashedPassword, email);
     }
 
 }

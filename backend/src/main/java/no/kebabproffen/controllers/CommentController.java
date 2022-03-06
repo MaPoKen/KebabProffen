@@ -5,17 +5,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.Comment;
+import no.kebabproffen.models.DAO.CommentDAO;
+import no.kebabproffen.models.DTO.CommentDTO;
 import no.kebabproffen.repositories.CommentRepository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -30,18 +26,18 @@ public class CommentController {
     }
 
     @GetMapping(value="/")
-    public List<Comment> getComments() {
-        return repository.findAll();
+    public List<CommentDTO> getComments() {
+        return repository.findAll().stream().map(CommentDAO::toDTO).toList();
     }
 
     @PostMapping(value = "/")
-    Comment createComment(@RequestBody Comment comment){
-        return repository.save(comment);
+    CommentDTO createComment(@RequestBody CommentDTO comment){
+        return repository.save(comment.toDAO()).toDTO();
     }
     
     @GetMapping(value = "/{commentId}")
-    Comment getComment(@PathVariable UUID commentId){
-        return repository.getById(commentId);
+    CommentDTO getComment(@PathVariable UUID commentId){
+        return repository.getById(commentId).toDTO();
     }
 
     @DeleteMapping(value = "/{commentId}")

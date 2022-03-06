@@ -5,17 +5,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.Location;
+import no.kebabproffen.models.DAO.LocationDAO;
+import no.kebabproffen.models.DTO.LocationDTO;
 import no.kebabproffen.repositories.LocationRepository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -30,18 +26,18 @@ public class LocationController {
     }
 
     @GetMapping(value="/")
-    public List<Location> getLocations() {
-        return repository.findAll();
+    public List<LocationDTO> getLocations() {
+        return repository.findAll().stream().map(LocationDAO::toDTO).toList();
     }
 
     @PostMapping(value = "/")
-    Location createLocation(@RequestBody Location location){
-        return repository.save(location);
+    LocationDTO createLocation(@RequestBody LocationDTO location){
+        return repository.save(location.toDAO()).toDTO();
     }
     
     @GetMapping(value = "/{locationId}")
-    Location getLocation(@PathVariable UUID locationId){
-        return repository.getById(locationId);
+    LocationDTO getLocation(@PathVariable UUID locationId){
+        return repository.getById(locationId).toDTO();
     }
 
     @DeleteMapping(value = "/{locationId}")

@@ -1,11 +1,15 @@
-package no.kebabproffen.models;
+package no.kebabproffen.models.DAO;
 
 import javax.persistence.*;
+
+import no.kebabproffen.models.DAOInterface;
+import no.kebabproffen.models.DTO.ReviewDTO;
+
 import java.util.*;
 
 @Entity
 @Table(name = "review")
-public class Review {
+public class ReviewDAO implements DAOInterface<ReviewDTO>{
     
     @Id
     @GeneratedValue
@@ -14,11 +18,11 @@ public class Review {
     
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserDAO user;
 
     @ManyToOne
     @JoinColumn(name = "resturant_id")
-    private Resturant resturant;
+    private ResturantDAO resturant;
     
     private String title;
     
@@ -26,7 +30,7 @@ public class Review {
     
     private int rating;
 
-    public Review(UUID reviewId, User user, Resturant resturant, String review, String title, int rating){
+    public ReviewDAO(UUID reviewId, UserDAO user, ResturantDAO resturant, String review, String title, int rating){
         this.reviewId = reviewId;
         this.user = user;
         this.resturant = resturant;
@@ -34,6 +38,9 @@ public class Review {
         this.rating = rating;
     }
 
-    
+    @Override
+    public ReviewDTO toDTO() {
+        return new ReviewDTO(reviewId, user.toDTO(), resturant.toDTO(), review, title, rating);
+    }
 
 }

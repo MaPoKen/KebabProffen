@@ -5,17 +5,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.CommentLike;
+import no.kebabproffen.models.DAO.CommentLikeDAO;
+import no.kebabproffen.models.DTO.CommentLikeDTO;
 import no.kebabproffen.repositories.CommentLikeRepository;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -30,18 +26,18 @@ public class CommentLikeController {
     }
 
     @GetMapping(value="/")
-    public List<CommentLike> getCommentLikes() {
-        return repository.findAll();
+    public List<CommentLikeDTO> getCommentLikes() {
+        return repository.findAll().stream().map(CommentLikeDAO::toDTO).toList();
     }
 
     @PostMapping(value = "/")
-    CommentLike createCommentLike(@RequestBody CommentLike commentLike){
-        return repository.save(commentLike);
+    CommentLikeDTO createCommentLike(@RequestBody CommentLikeDTO commentLike){
+        return repository.save(commentLike.toDAO()).toDTO();
     }
     
     @GetMapping(value = "/{commentLikeId}")
-    CommentLike getCommentLike(@PathVariable UUID commentLikeId){
-        return repository.getById(commentLikeId);
+    CommentLikeDTO getCommentLike(@PathVariable UUID commentLikeId){
+        return repository.getById(commentLikeId).toDTO();
     }
 
     @DeleteMapping(value = "/{commentLikeId}")

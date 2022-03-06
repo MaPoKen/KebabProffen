@@ -1,9 +1,11 @@
 package no.kebabproffen.repositories;
 
-import no.kebabproffen.models.Location;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import no.kebabproffen.models.DAO.LocationDAO;
+
 import java.util.UUID;
 // JpaRepository<Model, ID type>
-public interface LocationRepository extends JpaRepository<Location, UUID> {
+public interface LocationRepository extends JpaRepository<LocationDAO, UUID> {
 
 }

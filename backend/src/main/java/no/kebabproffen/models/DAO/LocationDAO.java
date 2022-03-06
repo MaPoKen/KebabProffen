@@ -1,10 +1,13 @@
-package no.kebabproffen.models;
+package no.kebabproffen.models.DAO;
 
 import javax.persistence.*;
 
+import no.kebabproffen.models.DAOInterface;
+import no.kebabproffen.models.DTO.LocationDTO;
+
 @Entity
 @Table(name = "location")
-public class Location{    
+public class LocationDAO implements DAOInterface<LocationDTO>{    
     @Id
     @GeneratedValue
     @Column(name = "location_id")
@@ -18,12 +21,17 @@ public class Location{
     
     private String country;
 
-    public Location(int locationId, double longitude, double latitude, String city, String country ){
+    public LocationDAO(int locationId, double longitude, double latitude, String city, String country ){
         this.locationId = locationId;
         this.longitude = longitude;
         this.latitude = latitude;
         this.city = city;
         this.country = country;
+    }
+
+    @Override
+    public LocationDTO toDTO() {
+        return new LocationDTO(locationId, longitude, latitude, city, country);
     }
 
 }
