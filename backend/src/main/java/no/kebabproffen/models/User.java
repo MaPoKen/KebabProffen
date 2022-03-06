@@ -1,6 +1,4 @@
 package no.kebabproffen.models;
-
-import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.util.UUID;
 
@@ -9,8 +7,7 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID",strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue
     @Column(name = "userid", updatable = false, nullable = false)
     private UUID userId;
 
@@ -21,8 +18,6 @@ public class User {
     
     @Column(unique = true)
     private String email;
-
-    public User(){}
 
     public User(String username, String hashedPassword, String email){
         this.username = username;

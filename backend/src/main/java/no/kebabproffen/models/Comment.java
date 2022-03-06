@@ -10,15 +10,15 @@ public class Comment {
 
     @Id
     @GeneratedValue
-    private final int commentId;
+    private final UUID commentId;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
     private final User user;
 
     @ManyToOne
-    @JoinColumn(name = "resturant_id")
-    private final Resturant resturant;
+    @JoinColumn(name = "review_id")
+    private final Review review;
 
     private final String comment;
 
@@ -27,13 +27,13 @@ public class Comment {
     private final LocalDateTime edited;
 
 
-    public Comment(int commentId, User user, String comment, LocalDateTime created, LocalDateTime edited, Resturant resturant){
+    public Comment(UUID commentId, User user, String comment, LocalDateTime created, LocalDateTime edited, Review review){
         this.commentId = commentId;
         this.user = user;
         this.comment = comment;
         this.created = created;
         this.edited = edited;
-        this.resturant = resturant;
+        this.review = review;
     };
 
 }

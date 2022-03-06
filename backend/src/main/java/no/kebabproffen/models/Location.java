@@ -4,10 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "location")
-public class Location{
-
-//    @OneToMany
-    
+public class Location{    
     @Id
     @GeneratedValue
     @Column(name = "location_id")
