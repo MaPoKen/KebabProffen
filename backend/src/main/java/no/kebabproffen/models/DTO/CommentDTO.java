@@ -3,12 +3,8 @@ package no.kebabproffen.models.DTO;
 import java.time.LocalDateTime;  
 import java.util.*;
 
-import javax.xml.stream.events.Comment;
-
 import no.kebabproffen.models.DTOInterface;
 import no.kebabproffen.models.DAO.CommentDAO;
-import no.kebabproffen.models.DAO.ReviewDAO;
-import no.kebabproffen.models.DAO.UserDAO;
 
 public class CommentDTO implements DTOInterface<CommentDAO>{
 

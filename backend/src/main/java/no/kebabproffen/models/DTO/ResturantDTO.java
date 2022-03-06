@@ -1,11 +1,7 @@
 package no.kebabproffen.models.DTO;
 
-import javax.persistence.*;
-
 import no.kebabproffen.models.DTOInterface;
 import no.kebabproffen.models.DAO.ResturantDAO;
-
-import java.util.*;
 
 public class ResturantDTO implements DTOInterface<ResturantDAO>{
 

@@ -1,7 +1,5 @@
 package no.kebabproffen.models.DTO;
 
-import javax.persistence.*;
-
 import no.kebabproffen.models.DTOInterface;
 import no.kebabproffen.models.DAO.ReviewLikeDAO;
 
