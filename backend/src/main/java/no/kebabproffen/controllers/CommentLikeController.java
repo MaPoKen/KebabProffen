@@ -13,40 +13,40 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import no.kebabproffen.models.Review;
-import no.kebabproffen.repositories.ReviewRepository;
+import no.kebabproffen.models.CommentLike;
+import no.kebabproffen.repositories.CommentLikeRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
 
 @RestController
-@RequestMapping("/api/review")
-public class ReviewController {
+@RequestMapping("/api/like/comment")
+public class CommentLikeController {
 
-    private final ReviewRepository repository;
+    private final CommentLikeRepository repository;
 
-    public ReviewController(ReviewRepository repository){
+    public CommentLikeController(CommentLikeRepository repository){
         this.repository = repository;
     }
 
     @GetMapping(value="/")
-    public List<Review> getReviews() {
+    public List<CommentLike> getCommentLikes() {
         return repository.findAll();
     }
 
     @PostMapping(value = "/")
-    Review createReview(@RequestBody Review review){
-        return repository.save(review);
+    CommentLike createCommentLike(@RequestBody CommentLike commentLike){
+        return repository.save(commentLike);
     }
     
-    @GetMapping(value = "/{reviewId}")
-    Review getReview(@RequestParam UUID reviewId){
-        return repository.getById(reviewId);
+    @GetMapping(value = "/{commentLikeId}")
+    CommentLike getCommentLike(@PathVariable UUID commentLikeId){
+        return repository.getById(commentLikeId);
     }
 
-    @DeleteMapping(value = "/{reviewId}")
-    void deleteReview(@RequestParam UUID reviewId){
-        repository.deleteById(reviewId);
+    @DeleteMapping(value = "/{commentLikeId}")
+    void deleteCommentLike(@PathVariable UUID commentLikeId){
+        repository.deleteById(commentLikeId);
     }
     
 }

@@ -17,7 +17,7 @@ import no.kebabproffen.models.User;
 import no.kebabproffen.repositories.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 class UserController {
 
   private final UserRepository repository;
@@ -26,21 +26,26 @@ class UserController {
     this.repository = repository;
   }
 
-  @GetMapping("/users")
+  @GetMapping("/")
   List<User> all() {
     return repository.findAll();
   }
 
 
-  @PostMapping("/users")
+  @PostMapping("/")
   User newUser(@RequestBody User newUser) {
     return repository.save(newUser);
   }
 
-  @GetMapping("/users/{userId}")
+  @GetMapping("/{userId}")
   User one(@PathVariable("userId") UUID userId) {
     return repository.findById(userId)
     .orElseGet(() -> null);
+  }
+
+  @DeleteMapping("/{userId}")
+  void deleteUser(@PathVariable("userId") UUID userid){
+    repository.deleteById(userid);
   }
 
 
