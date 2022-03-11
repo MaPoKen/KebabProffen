@@ -10,8 +10,9 @@ public class UserDTO implements DTOInterface<UserDAO> {
     private String username;
     private String password;
     private String email;
+    private RoleDTO role;
 
-    public UserDTO(String username, String password, String email){
+    public UserDTO(String username, String password, String email, RoleDTO role){
         this.username = username;
         this.password = password;
         this.email = email;
@@ -46,7 +47,7 @@ public class UserDTO implements DTOInterface<UserDAO> {
 
     @Override
     public UserDAO toDAO() {
-        return new UserDAO(username, password, email);
+        return new UserDAO(username, password, email, role.toDAO());
     }
 
 }

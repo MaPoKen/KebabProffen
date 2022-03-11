@@ -1,11 +1,10 @@
 package no.kebabproffen.models.DAO;
 
-import javax.persistence.Table;
 import java.util.UUID;
 import javax.persistence.*;
 
 @Entity
-@Table(name="likes")
+@DiscriminatorColumn(name="REF_LIKE")
 public abstract class LikeDAO {
 
     @Id
