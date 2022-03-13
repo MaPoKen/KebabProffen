@@ -38,6 +38,8 @@ public class ReviewDAO implements DAOInterface<ReviewDTO>{
         this.rating = rating;
     }
 
+    public ReviewDAO(){}
+
     @Override
     public ReviewDTO toDTO() {
         return new ReviewDTO(reviewId, user.toDTO(), resturant.toDTO(), review, title, rating);

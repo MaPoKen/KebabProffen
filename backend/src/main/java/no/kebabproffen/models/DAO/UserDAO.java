@@ -15,28 +15,39 @@ public class UserDAO implements DAOInterface<UserDTO>{
     @Column(name = "userid", updatable = false, nullable = false)
     private UUID userId;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
-
-    private String hashedPassword;
     
-    @Column(unique = true)
+    @Column(nullable = false)
+    private String password;
+    
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private RoleDAO role;
 
-    public UserDAO(String username, String hashedPassword, String email, RoleDAO role){
+    public UserDAO(String username, String password, String email, RoleDAO role){
         this.username = username;
-        this.hashedPassword = hashedPassword;
+        this.password = password;
         this.email = email;
         this.role = role;
     }
+    
+    public UserDAO(UUID userId, String username, String password, String email, RoleDAO role){
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.userId = userId;
+    }
+
+    public UserDAO(){}
 
 
     @Override
     public UserDTO toDTO() {
-        return new UserDTO(username, hashedPassword, email, role.toDTO());
+        return new UserDTO(userId, username, password, email, role.toDTO());
     }
 
 }

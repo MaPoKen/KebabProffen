@@ -31,6 +31,7 @@ class UserController {
 
   @PostMapping("/")
   UserDTO newUser(@RequestBody UserDTO newUser) {
+    System.out.println(newUser.getRole().getRole());
     return repository.save(newUser.toDAO()).toDTO();
   }
 

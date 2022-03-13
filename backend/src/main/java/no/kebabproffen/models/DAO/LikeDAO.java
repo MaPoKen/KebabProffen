@@ -9,8 +9,7 @@ public abstract class LikeDAO {
 
     @Id
     @GeneratedValue
-    protected
-    final UUID likeId;
+    protected UUID likeId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -23,4 +22,6 @@ public abstract class LikeDAO {
         this.rating = rating;
         this.user = user;
     }
+
+    public LikeDAO(){}
 }

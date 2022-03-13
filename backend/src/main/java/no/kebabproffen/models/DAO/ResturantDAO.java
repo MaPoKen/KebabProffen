@@ -27,6 +27,8 @@ public class ResturantDAO implements DAOInterface<ResturantDTO>{
         this.name = name;
         this.type = type;
     }
+    
+    public ResturantDAO(){}
 
     @Override
     public ResturantDTO toDTO() {

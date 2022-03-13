@@ -16,14 +16,18 @@ public class UserDTO implements DTOInterface<UserDAO> {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
 
-    public UserDTO(UUID userId, String username, String password, String email){
+    public UserDTO(UUID userId, String username, String password, String email, RoleDTO role){
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.role = role;
     }
+
+    public UserDTO(){}
 
     public UUID getUserId(){
         return userId;
@@ -45,8 +49,13 @@ public class UserDTO implements DTOInterface<UserDAO> {
         return email;
     }
 
+    public RoleDTO getRole(){
+        return role;
+    }
+
     @Override
     public UserDAO toDAO() {
+        System.out.println(role.getRole());
         return new UserDAO(username, password, email, role.toDAO());
     }
 

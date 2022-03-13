@@ -14,21 +14,21 @@ public class CommentDAO implements DAOInterface<CommentDTO>{
 
     @Id
     @GeneratedValue
-    private final UUID commentId;
+    private UUID commentId;
     
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private final UserDAO user;
+    private UserDAO user;
 
     @ManyToOne
     @JoinColumn(name = "review_id")
-    private final ReviewDAO review;
+    private ReviewDAO review;
 
-    private final String comment;
+    private String comment;
 
-    private final LocalDateTime created;
+    private LocalDateTime created;
 
-    private final LocalDateTime edited;
+    private LocalDateTime edited;
 
     public CommentDAO(UUID commentId, UserDAO user, String comment, LocalDateTime created, LocalDateTime edited, ReviewDAO review){
         this.commentId = commentId;
@@ -38,6 +38,8 @@ public class CommentDAO implements DAOInterface<CommentDTO>{
         this.edited = edited;
         this.review = review;
     }
+
+    public CommentDAO(){}
 
     @Override
     public CommentDTO toDTO() {

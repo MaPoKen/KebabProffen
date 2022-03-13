@@ -31,6 +31,8 @@ public class RoleDAO implements DAOInterface<RoleDTO> {
         this.role = role;
     }
 
+    public RoleDAO(){}
+
     @Override
     public RoleDTO toDTO() {
         return new RoleDTO(role);

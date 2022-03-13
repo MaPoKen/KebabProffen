@@ -29,6 +29,8 @@ public class LocationDAO implements DAOInterface<LocationDTO>{
         this.country = country;
     }
 
+    public LocationDAO(){}
+
     @Override
     public LocationDTO toDTO() {
         return new LocationDTO(locationId, longitude, latitude, city, country);
